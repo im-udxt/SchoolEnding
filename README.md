@@ -38,7 +38,7 @@ A beautiful, interactive web-based photo album that displays class memories in a
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/class12-memories.git
+git clone https://github.com/im-udxt/SchoolEnding.git
 ```
 
 2. Create an `imgs` folder in the project directory
