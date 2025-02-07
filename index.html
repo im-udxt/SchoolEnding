@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class 12 Memories</title>
+    <!-- Add Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: radial-gradient(
+                circle at center,
+                #2c3e50,  /* Dark blue-gray */
+                #34495e 25%,  /* Darker blue-gray */
+                #3498db 50%,  /* Muted blue */
+                #2980b9 75%,  /* Darker muted blue */
+                #1a1a2e     /* Very dark blue */
+            );
+            background-size: 200% 200%;
+            animation: gradientBG 15s ease infinite;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .title {
+            text-align: center;
+            color: #ecf0f1;  /* Lighter text for better contrast */
+            font-size: clamp(2em, 5vw, 3.5em);
+            margin-bottom: clamp(20px, 4vw, 40px);
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            font-family: 'Dancing Script', cursive;
+            animation: floatTitle 3s ease-in-out infinite;
+            padding: 0 15px;
+        }
+
+        @keyframes floatTitle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .title span {
+            display: inline-block;
+            margin: 0 5px;
+            animation: sparkle 1.5s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .memories-container {
+            position: relative;
+            width: min(350px, 90vw);
+            height: min(500px, 80vh);
+            margin: clamp(20px, 4vw, 50px) auto;
+            perspective: 1000px;
+            margin-bottom: clamp(50px, 10vh, 80px);
+        }
+
+        .memory-card {
+            position: absolute;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 10px;
+            padding: clamp(10px, 2vw, 15px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            transform-origin: center center;
+            left: 0;
+            right: 0;
+            margin: auto;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .memory-card:hover {
+            transform: scale(1.05) rotate(0deg) !important;
+            z-index: 1000 !important;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            border-color: #ffffff;
+        }
+
+        .memory-card.fade-out {
+            opacity: 0;
+            transform: scale(0.8) translateY(-100px) !important;
+        }
+
+        .memory-image {
+            width: 100%;
+            height: min(300px, 50vh);
+            object-fit: cover;
+            border-radius: 7px;
+            margin-bottom: clamp(5px, 1vw, 8px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .memory-card:hover .memory-image {
+            transform: scale(1.02);
+        }
+
+        .memory-description {
+            color: #2d3436;
+            font-size: clamp(0.9em, 2vw, 1em);
+            line-height: 1.4;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: clamp(6px, 1.5vw, 10px);
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+
+        /* Add sparkle effect to emojis */
+        .sparkle {
+            display: inline-block;
+            animation: rotate 3s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Media Queries for different devices */
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .memory-card:hover {
+                transform: scale(1.02) rotate(0deg) !important;
+            }
+
+            .title span {
+                font-size: 0.8em;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .memories-container {
+                width: 95vw;
+            }
+
+            .memory-card {
+                padding: 8px;
+            }
+
+            .memory-description {
+                padding: 8px;
+                font-size: 0.9em;
+            }
+        }
+
+        /* For larger screens */
+        @media (min-width: 1200px) {
+            .memories-container {
+                width: 400px;
+                height: 550px;
+            }
+
+            .memory-image {
+                height: 320px;
+            }
+        }
+
+        /* For landscape mode on mobile */
+        @media (max-height: 600px) and (orientation: landscape) {
+            .memories-container {
+                height: 85vh;
+            }
+
+            .memory-image {
+                height: 45vh;
+            }
+
+            .title {
+                margin-bottom: 15px;
+            }
+        }
+
+        /* Add footer styles */
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+            padding: clamp(8px, 2vw, 15px);
+            background: rgba(26, 26, 46, 0.9);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+        }
+
+        .footer a {
+            color: #ecf0f1;
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(0.8em, 1.5vw, 1em);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .footer a:hover {
+            color: #3498db;
+        }
+
+        .footer a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: #3498db;
+            transition: width 0.3s ease;
+        }
+
+        .footer a:hover::after {
+            width: 100%;
+        }
+
+        /* Update footer for mobile */
+        @media (max-width: 480px) {
+            .footer {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="title">
+        <span>✨</span>
+         Class 12th-A Album
+        <span>✨</span>
+    </h1>
+    <div class="memories-container" id="memoriesContainer"></div>
+    <footer class="footer">
+        <a href="https://uditgarg.me" target="_blank" rel="noopener noreferrer">Made with ❤️ by Udit Garg</a>
+    </footer>
+
+    <script>
+        async function loadDescription(index) {
+            try {
+                const response = await fetch(`imgs/dsc${index}.txt`);
+                if (!response.ok) throw new Error('Description not found');
+                return await response.text();
+            } catch (error) {
+                return 'Memory description not available';
+            }
+        }
+
+        function getRandomRotation(previousAngle = null) {
+            let angle;
+            do {
+                angle = Math.random() * 20 - 10; // Random angle between -10 and 10 degrees
+            } while (
+                previousAngle !== null && 
+                Math.abs(angle - previousAngle) < 4 // Ensure at least 4 degrees difference
+            );
+            return angle;
+        }
+
+        function getRandomOffset() {
+            return {
+                x: Math.random() * 20 - 10, // Random offset between -10 and 10 pixels
+                y: Math.random() * 20 - 10
+            };
+        }
+
+        async function createMemoryCards() {
+            const container = document.getElementById('memoriesContainer');
+            let index = 1;
+            let zIndex = 1;
+            let previousAngle = null;
+            let totalCards = 0;
+            let removedCards = 0;
+
+            while (true) {
+                try {
+                    // Test if image exists
+                    const img = new Image();
+                    img.src = `imgs/img${index}.png`;
+                    
+                    await new Promise((resolve, reject) => {
+                        img.onload = resolve;
+                        img.onerror = reject;
+                    });
+
+                    const description = await loadDescription(index);
+                    const offset = getRandomOffset();
+                    const rotation = getRandomRotation(previousAngle);
+                    previousAngle = rotation;
+
+                    const card = document.createElement('div');
+                    card.className = 'memory-card';
+                    card.innerHTML = `
+                        <img src="imgs/img${index}.png" class="memory-image" alt="Memory ${index}">
+                        <p class="memory-description">${description}</p>
+                    `;
+
+                    // Apply random rotation and position
+                    card.style.transform = `rotate(${rotation}deg) translate(${offset.x}px, ${offset.y}px)`;
+                    card.style.zIndex = zIndex;
+
+                    card.addEventListener('click', function() {
+                        this.classList.add('fade-out');
+                        setTimeout(() => {
+                            this.remove();
+                            removedCards++;
+                            
+                            // Check if all cards are removed
+                            if (removedCards === totalCards) {
+                                setTimeout(() => {
+                                    location.reload();
+                                }, 500); // Wait half a second before refreshing
+                            }
+                        }, 500);
+                    });
+
+                    container.appendChild(card);
+                    index++;
+                    zIndex++;
+                    totalCards++;
+                } catch (error) {
+                    if (index === 1) {
+                        container.innerHTML = '<p style="text-align: center;">No images found in the imgs folder!</p>';
+                    }
+                    break; // Stop when no more images are found
+                }
+            }
+        }
+
+        // Load memory cards when the page loads
+        window.addEventListener('load', createMemoryCards);
+    </script>
+</body>
+</html>
