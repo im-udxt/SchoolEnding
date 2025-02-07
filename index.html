@@ -62,21 +62,21 @@
 
         .memories-container {
             position: relative;
-            width: min(350px, 90vw);
-            height: min(500px, 80vh);
-            margin: clamp(20px, 4vw, 50px) auto;
+            width: min(260px, 75vw);
+            height: min(400px, 60vh);
+            margin: clamp(10px, 2vw, 30px) auto;
             perspective: 1000px;
-            margin-bottom: clamp(50px, 10vh, 80px);
+            margin-bottom: clamp(30px, 6vh, 50px);
         }
 
         .memory-card {
             position: absolute;
             width: 100%;
             background: rgba(255, 255, 255, 0.85);
-            border-radius: 10px;
-            padding: clamp(10px, 2vw, 15px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 5px;
+            padding: clamp(4px, 1vw, 8px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
             transform-origin: center center;
             left: 0;
@@ -100,11 +100,11 @@
 
         .memory-image {
             width: 100%;
-            height: min(300px, 50vh);
+            height: min(180px, 35vh);  /* Significantly reduced height */
             object-fit: cover;
-            border-radius: 7px;
-            margin-bottom: clamp(5px, 1vw, 8px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 3px;
+            margin-bottom: clamp(2px, 0.5vw, 4px);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
             transition: transform 0.3s ease;
         }
 
@@ -114,15 +114,15 @@
 
         .memory-description {
             color: #2d3436;
-            font-size: clamp(0.9em, 2vw, 1em);
-            line-height: 1.4;
+            font-size: clamp(0.75em, 1.4vw, 0.85em);
+            line-height: 1.2;
             text-align: center;
             background: rgba(255, 255, 255, 0.9);
-            padding: clamp(6px, 1.5vw, 10px);
-            border-radius: 10px;
+            padding: clamp(3px, 0.8vw, 5px);
+            border-radius: 4px;
             font-family: 'Poppins', sans-serif;
             font-weight: 400;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
         }
 
         /* Add sparkle effect to emojis */
@@ -136,60 +136,59 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Media Queries for different devices */
+        /* Mobile styles */
         @media (max-width: 480px) {
             body {
-                padding: 10px;
-            }
-
-            .memory-card:hover {
-                transform: scale(1.02) rotate(0deg) !important;
-            }
-
-            .title span {
-                font-size: 0.8em;
-            }
-        }
-
-        @media (max-width: 360px) {
-            .memories-container {
-                width: 95vw;
-            }
-
-            .memory-card {
                 padding: 8px;
             }
 
-            .memory-description {
-                padding: 8px;
-                font-size: 0.9em;
-            }
-        }
-
-        /* For larger screens */
-        @media (min-width: 1200px) {
             .memories-container {
-                width: 400px;
-                height: 550px;
+                width: 78vw;
+                height: 58vh;  /* Reduced to prevent overflow */
+                margin-top: 5px;
             }
 
             .memory-image {
-                height: 320px;
-            }
-        }
-
-        /* For landscape mode on mobile */
-        @media (max-height: 600px) and (orientation: landscape) {
-            .memories-container {
-                height: 85vh;
-            }
-
-            .memory-image {
-                height: 45vh;
+                height: 32vh;
             }
 
             .title {
+                font-size: clamp(1.8em, 4vw, 2.5em);
                 margin-bottom: 15px;
+            }
+        }
+
+        /* Very small devices */
+        @media (max-width: 360px) {
+            .memories-container {
+                width: 85vw;
+                height: 55vh;
+            }
+
+            .memory-card {
+                padding: 4px;
+            }
+
+            .memory-description {
+                padding: 3px;
+                font-size: 0.75em;
+            }
+        }
+
+        /* For landscape mode */
+        @media (max-height: 600px) and (orientation: landscape) {
+            .memories-container {
+                height: 65vh;
+                margin-top: 5px;
+            }
+
+            .memory-image {
+                height: 40vh;
+            }
+
+            .title {
+                font-size: 1.8em;
+                margin-bottom: 10px;
             }
         }
 
@@ -239,6 +238,40 @@
         @media (max-width: 480px) {
             .footer {
                 padding: 8px;
+            }
+        }
+
+        /* Desktop styles */
+        @media (min-width: 1024px) {
+            .memories-container {
+                width: 380px;  /* Larger width for desktop */
+                height: 520px;  /* Larger height for desktop */
+            }
+
+            .memory-image {
+                height: 300px;  /* Taller images on desktop */
+            }
+
+            .memory-description {
+                font-size: 0.9em;  /* Larger text on desktop */
+                padding: 8px;
+                line-height: 1.4;
+            }
+
+            .memory-card {
+                padding: 12px;  /* More padding on desktop */
+            }
+        }
+
+        /* Extra large screens */
+        @media (min-width: 1440px) {
+            .memories-container {
+                width: 420px;
+                height: 580px;
+            }
+
+            .memory-image {
+                height: 340px;
             }
         }
     </style>
